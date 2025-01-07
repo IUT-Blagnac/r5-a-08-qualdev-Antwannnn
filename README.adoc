@@ -36,6 +36,7 @@ Feature: Is it Friday yet?
 ---
 
 Trace d'execution des tests
+
 image::screenshots/executiontp1.png[Trace d'execution des tests]
 
 == TP2
@@ -87,4 +88,5 @@ public class Order {
 ---
 
 Trace d'execution des tests
+
 image::screenshots/executiontp2.png[Trace d'execution des tests]
