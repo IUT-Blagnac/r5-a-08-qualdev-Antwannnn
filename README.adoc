@@ -14,6 +14,23 @@ public void today_is_sunday() {
     // Write code here that turns the phrase above into concrete actions
     throw new io.cucumber.java.PendingException();
 }
+
+Feature: Is it Friday yet?
+  Everybody wants to know when it's Friday
+
+  Scenario Outline: Checking if it's Friday
+    Given today is "<day>"
+    When I ask whether it's Friday yet
+    Then I should be told "<answer>"
+
+    Examples:
+      | day            | answer |
+      | Friday         | TGIF   |
+      | Sunday         | Nope   |
+      | anything else! | Nope   |
+
+
+image::screenshots/executiontp1.png[Trace d'execution des tests]
 ---
 
 .Exemple d'image insérée en asciidoc
