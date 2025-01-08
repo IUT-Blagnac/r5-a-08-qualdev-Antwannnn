@@ -90,3 +90,229 @@ Contenu de order.java
 Trace d'execution des tests
 
 image::screenshots/executiontp2.png[Trace d'execution des tests]
+
+== TP3
+
+Trace d'execution des tests (en texte car trop long)
+
+[text]
+----
+antoineleboucher@MacBook-Air-de-Antoine tp3 % ./docker_build_and_launch.sh
+Building Docker image...
+[+] Building 6.5s (11/11) FINISHED                                                       docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                     0.0s
+ => => transferring dockerfile: 368B                                                                     0.0s
+ => [internal] load metadata for docker.io/library/python:3.9-slim                                       0.7s
+ => [internal] load .dockerignore                                                                        0.0s
+ => => transferring context: 2B                                                                          0.0s
+ => [1/6] FROM docker.io/library/python:3.9-slim@sha256:caaf1af9e23adc6149e5d20662b267ead9505868ff07c76  0.0s
+ => => resolve docker.io/library/python:3.9-slim@sha256:caaf1af9e23adc6149e5d20662b267ead9505868ff07c76  0.0s
+ => [internal] load build context                                                                        0.0s
+ => => transferring context: 3.65kB                                                                      0.0s
+ => CACHED [2/6] WORKDIR /app                                                                            0.0s
+ => CACHED [3/6] COPY requirements.txt .                                                                 0.0s
+ => CACHED [4/6] COPY password_generator.py .                                                            0.0s
+ => [5/6] COPY features/ ./features/                                                                     0.0s
+ => [6/6] RUN pip install --no-cache-dir -r requirements.txt                                             4.5s
+ => exporting to image                                                                                   1.1s 
+ => => exporting layers                                                                                  0.8s 
+ => => exporting manifest sha256:518ec675eb8fd98deb1910605faf4b9ed491b9eac75b17e1a4845babfe2060ef        0.0s 
+ => => exporting config sha256:1d59ff394f6d31784cda8da891b839241f706cc4d0542051b14f1746cce546fd          0.0s 
+ => => exporting attestation manifest sha256:fef01c89e6611c30eeeeaba136addfa91682b17fd823d061b7e564af61  0.0s 
+ => => exporting manifest list sha256:1286adaa01cd0f4f11dbf1367c49e46d4f7f50ae13132b93fe8a56159ab0bf23   0.0s 
+ => => naming to docker.io/library/password-generator-tests:latest                                       0.0s
+ => => unpacking to docker.io/library/password-generator-tests:latest 
+Running tests...
+Fonctionnalité: Générateur de mot de passe # features/password_generator.feature:2
+  En tant qu'utilisateur
+  Je veux pouvoir générer différents types de mots de passe
+  Afin de sécuriser mes comptes avec des mots de passe robustes
+  Scénario: Génération d'un mot de passe par défaut                 # features/password_generator.feature:7
+    Quand je génère un mot de passe par défaut                      # features/steps/password_generator_steps.py:5
+    Alors je dois obtenir un mot de passe de 16 caractères          # features/steps/password_generator_steps.py:10
+    Et le mot de passe doit contenir au moins 2 caractères spéciaux # features/steps/password_generator_steps.py:14
+    Et le mot de passe doit contenir au moins 2 chiffres            # features/steps/password_generator_steps.py:19
+    Et le mot de passe doit contenir au moins 2 lettres majuscules  # features/steps/password_generator_steps.py:24
+
+  Plan du Scénario: Génération d'un mot de passe personnalisé -- @1.1   # features/password_generator.feature:25
+    Quand je génère un mot de passe avec les exigences suivantes        # features/steps/password_generator_steps.py:29
+      | longueur_min | caracteres_speciaux_min | chiffres_min | majuscules_min | exclure_similaires | exclure_ambigus |
+      | 12           | 1                       | 1            | 1              | false              | false           |
+    Alors je dois obtenir un mot de passe de 12 caractères              # features/steps/password_generator_steps.py:10
+    Et le mot de passe doit contenir au moins 1 caractères spéciaux     # features/steps/password_generator_steps.py:14
+    Et le mot de passe doit contenir au moins 1 chiffres                # features/steps/password_generator_steps.py:19
+    Et le mot de passe doit contenir au moins 1 lettres majuscules      # features/steps/password_generator_steps.py:24
+
+  Plan du Scénario: Génération d'un mot de passe personnalisé -- @1.2   # features/password_generator.feature:26
+    Quand je génère un mot de passe avec les exigences suivantes        # features/steps/password_generator_steps.py:29
+      | longueur_min | caracteres_speciaux_min | chiffres_min | majuscules_min | exclure_similaires | exclure_ambigus |
+      | 20           | 3                       | 3            | 3              | true               | true            |
+    Alors je dois obtenir un mot de passe de 20 caractères              # features/steps/password_generator_steps.py:10
+    Et le mot de passe doit contenir au moins 3 caractères spéciaux     # features/steps/password_generator_steps.py:14
+    Et le mot de passe doit contenir au moins 3 chiffres                # features/steps/password_generator_steps.py:19
+    Et le mot de passe doit contenir au moins 3 lettres majuscules      # features/steps/password_generator_steps.py:24
+
+  Plan du Scénario: Génération d'un mot de passe personnalisé -- @1.3   # features/password_generator.feature:27
+    Quand je génère un mot de passe avec les exigences suivantes        # features/steps/password_generator_steps.py:29
+      | longueur_min | caracteres_speciaux_min | chiffres_min | majuscules_min | exclure_similaires | exclure_ambigus |
+      | 8            | 0                       | 1            | 1              | false              | false           |
+    Alors je dois obtenir un mot de passe de 8 caractères               # features/steps/password_generator_steps.py:10
+    Et le mot de passe doit contenir au moins 0 caractères spéciaux     # features/steps/password_generator_steps.py:14
+    Et le mot de passe doit contenir au moins 1 chiffres                # features/steps/password_generator_steps.py:19
+    Et le mot de passe doit contenir au moins 1 lettres majuscules      # features/steps/password_generator_steps.py:24
+
+  Scénario: Génération d'un mot de passe mémorable                 # features/password_generator.feature:29
+    Quand je génère un mot de passe mémorable                      # features/steps/password_generator_steps.py:43
+    Alors je dois obtenir un mot de passe contenant 4 mots         # features/steps/password_generator_steps.py:48
+    Et les mots doivent être séparés par des caractères spéciaux   # features/steps/password_generator_steps.py:54
+    Et certains caractères doivent être remplacés par des chiffres # features/steps/password_generator_steps.py:58
+
+  Scénario: Vérification des exigences du mot de passe  # features/password_generator.feature:35
+    Étant donné un mot de passe "Test123456!@#"         # features/steps/password_generator_steps.py:62
+    Quand je vérifie les exigences suivantes            # features/steps/password_generator_steps.py:66
+      | longueur_min | caracteres_speciaux_min | chiffres_min | majuscules_min |
+      | 10           | 3                       | 3            | 1              |
+    Alors la vérification doit retourner vrai           # features/steps/password_generator_steps.py:78
+
+1 feature passed, 0 failed, 0 skipped
+6 scenarios passed, 0 failed, 0 skipped
+27 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m0.003s
+✅ Tests réussis!
+----
+
+Fichier de tests
+
+[source,gherkin]
+----
+# language: fr
+Fonctionnalité: Générateur de mot de passe
+  En tant qu'utilisateur
+  Je veux pouvoir générer différents types de mots de passe
+  Afin de sécuriser mes comptes avec des mots de passe robustes
+
+  Scénario: Génération d'un mot de passe par défaut
+    Quand je génère un mot de passe par défaut
+    Alors je dois obtenir un mot de passe de 16 caractères
+    Et le mot de passe doit contenir au moins 2 caractères spéciaux
+    Et le mot de passe doit contenir au moins 2 chiffres
+    Et le mot de passe doit contenir au moins 2 lettres majuscules
+
+  Plan du Scénario: Génération d'un mot de passe personnalisé
+    Quand je génère un mot de passe avec les exigences suivantes:
+      | longueur_min | caracteres_speciaux_min | chiffres_min | majuscules_min | exclure_similaires | exclure_ambigus |
+      | <longueur>   | <spec_chars>            | <numbers>     | <uppercase>    | <sim>             | <amb>           |
+    Alors je dois obtenir un mot de passe de <longueur> caractères
+    Et le mot de passe doit contenir au moins <spec_chars> caractères spéciaux
+    Et le mot de passe doit contenir au moins <numbers> chiffres
+    Et le mot de passe doit contenir au moins <uppercase> lettres majuscules
+
+    Exemples:
+      | longueur | spec_chars | numbers | uppercase | sim   | amb   |
+      | 12       | 1          | 1       | 1         | false | false |
+      | 20       | 3          | 3       | 3         | true  | true  |
+      | 8        | 0          | 1       | 1         | false | false |
+
+  Scénario: Génération d'un mot de passe mémorable
+    Quand je génère un mot de passe mémorable
+    Alors je dois obtenir un mot de passe contenant 4 mots
+    Et les mots doivent être séparés par des caractères spéciaux
+    Et certains caractères doivent être remplacés par des chiffres
+
+  Scénario: Vérification des exigences du mot de passe
+    Étant donné un mot de passe "Test123456!@#"
+    Quand je vérifie les exigences suivantes:
+      | longueur_min | caracteres_speciaux_min | chiffres_min | majuscules_min |
+      | 10           | 3                       | 3            | 1              |
+    Alors la vérification doit retourner vrai
+----
+
+Fichier de steps
+
+[source,python]
+----
+from behave import *
+from password_generator import PasswordGenerator
+import re
+
+@when('je génère un mot de passe par défaut')
+def step_impl(context):
+    generator = PasswordGenerator()
+    context.password = generator.generate_default()
+
+@then('je dois obtenir un mot de passe de {length:d} caractères')
+def step_impl(context, length):
+    assert len(context.password) == length
+
+@then('le mot de passe doit contenir au moins {count:d} caractères spéciaux')
+def step_impl(context, count):
+    special_chars = sum(1 for c in context.password if c in "!@#$%^&*()_+-=[]{}|;:,.<>?")
+    assert special_chars >= count
+
+@then('le mot de passe doit contenir au moins {count:d} chiffres')
+def step_impl(context, count):
+    digits = sum(1 for c in context.password if c.isdigit())
+    assert digits >= count
+
+@then('le mot de passe doit contenir au moins {count:d} lettres majuscules')
+def step_impl(context, count):
+    uppercase = sum(1 for c in context.password if c.isupper())
+    assert uppercase >= count
+
+@when('je génère un mot de passe avec les exigences suivantes')
+def step_impl(context):
+    generator = PasswordGenerator()
+    row = context.table[0]
+    requirements = {
+        'min_length': int(row['longueur_min']),
+        'min_special_chars': int(row['caracteres_speciaux_min']),
+        'min_numbers': int(row['chiffres_min']),
+        'min_uppercase': int(row['majuscules_min']),
+        'exclude_similar': row['exclure_similaires'] == 'true',
+        'exclude_ambiguous': row['exclure_ambigus'] == 'true'
+    }
+    context.password = generator.generate_custom(requirements)
+
+@when('je génère un mot de passe mémorable')
+def step_impl(context):
+    generator = PasswordGenerator()
+    context.password = generator.generate_memorable()
+
+@then('je dois obtenir un mot de passe contenant {count:d} mots')
+def step_impl(context, count):
+    # On compte le nombre de groupes de caractères séparés par des caractères spéciaux
+    words = re.split('[#$%&@]', context.password)
+    assert len(words) == count
+
+@then('les mots doivent être séparés par des caractères spéciaux')
+def step_impl(context):
+    assert any(c in context.password for c in ['#', '$', '%', '&', '@'])
+
+@then('certains caractères doivent être remplacés par des chiffres')
+def step_impl(context):
+    assert any(c.isdigit() for c in context.password)
+
+@given('un mot de passe "{password}"')
+def step_impl(context, password):
+    context.password = password
+
+@when('je vérifie les exigences suivantes')
+def step_impl(context):
+    generator = PasswordGenerator()
+    row = context.table[0]
+    context.requirements = {
+        'min_length': int(row['longueur_min']),
+        'min_special_chars': int(row['caracteres_speciaux_min']),
+        'min_numbers': int(row['chiffres_min']),
+        'min_uppercase': int(row['majuscules_min'])
+    }
+    context.result = generator.verify_requirements(context.password, context.requirements)
+
+@then('la vérification doit retourner {expected}')
+def step_impl(context, expected):
+    expected_bool = expected.lower() == 'vrai'
+    assert context.result == expected_bool, f"Expected {expected_bool} but got {context.result}"
+----
+
+L'objectif ici est de tester le générateur de mot de passe ainsi que les exigences de sécurité qui sont définies dans le fichier de tests.
+
