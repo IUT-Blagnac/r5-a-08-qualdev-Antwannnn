@@ -17,7 +17,7 @@ Ce dépôt concerne les rendus de mailto:A_changer@etu.univ-tlse2.fr[Jonh Doe].
 
 
 ----
-
+Code du fichier is_it_friday_yet.feature
 [source,gherkin]
 ----
 Feature: Is it Friday yet?
